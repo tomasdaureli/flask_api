@@ -5,7 +5,7 @@ from bson import json_util
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
-app.config['MONGO_URI']='mongodb://localhost:27023/test'
+app.config['MONGO_URI']='mongodb://mongo:27023/test'
 
 mongo = PyMongo(app)
 
@@ -16,6 +16,7 @@ def create_user():
     email = request.json['email']
 
     if username and password and email:
+        print('Creando usuario...')
         _id = mongo.db.users.insert_one({'username': username, 'password': generate_password_hash(password), 'email': email})
         print(request.json)
         response = {
@@ -24,8 +25,10 @@ def create_user():
             'password': password,
             'email': email
         }
+        
         return response
     else:
+        print('Error...')
         return not_found()
     
 @app.route('/users', methods=['GET'])
