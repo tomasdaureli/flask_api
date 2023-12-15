@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  flaskito2:
+    build: .
+    ports:
+      - "5000:5000"
+    links:
+      - monguito
+  monguito:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

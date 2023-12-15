@@ -5,7 +5,7 @@ from bson import json_util
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
-app.config['MONGO_URI']='mongodb://mongo:27023/test'
+app.config['MONGO_URI']='mongodb://monguito:27017/test'
 
 mongo = PyMongo(app)
 
@@ -76,4 +76,4 @@ def not_found(error=None):
     return response
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',debug=True)
